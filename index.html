@@ -206,7 +206,7 @@
     .bpw-bot-message { background: var(--bpw-bot-message-bg) !important; color: var(--bpw-text) !important; }
     .bpw-from-user   { background: var(--bpw-user-message-bg) !important; color: #fff !important; }
 
-    /* Rename in header */
+    /* Rename in chat header */
     .bpw-header-title * { visibility: hidden !important; }
     .bpw-header-title::after {
       content: "Hillary + AI"; visibility: visible; display: inline-block; font-weight: 600;
@@ -214,34 +214,6 @@
 
     @keyframes pulse { 0%,100% { opacity:.55; transform:scale(1);} 50% { opacity:1; transform:scale(1.04);} }
     @keyframes swirl { 0% {background-position:0% 50%;} 50% {background-position:100% 50%;} 100% {background-position:0% 50%;} }
-
-    /* ===== Floating helper popup near “Current status” ===== */
-    .hk-helper {
-      position: fixed; inset: auto auto 110px 24px; /* mobile/default */
-      max-width: 420px; background: rgba(11,18,32,.96);
-      border: 1px solid rgba(148,163,184,.25); border-radius: 12px;
-      box-shadow: 0 28px 80px rgba(2,6,23,.65);
-      color: #e2e8f0; z-index: 10000; padding: 14px 16px 12px;
-      animation: hkFloat 6s ease-in-out infinite;
-    }
-    .hk-helper[hidden] { display: none !important; }
-    .hk-helper header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
-    .hk-helper header .logo {
-      width: 28px; height: 28px; border-radius: 999px; display:grid; place-items:center;
-      font-size:14px; font-weight:700; color:#0b1220; background: linear-gradient(150deg,#38bdf8 0%,#6366f1 100%);
-    }
-    .hk-helper h4 { margin: 0; font-size: 15px; }
-    .hk-helper p { margin: 6px 0 10px; font-size: 14px; color: #cbd5e1; }
-    .hk-helper .actions { display:flex; gap:10px; }
-    .hk-helper button {
-      cursor: pointer; border:1px solid rgba(148,163,184,.25); border-radius:8px; padding:8px 10px;
-      background: rgba(56,189,248,.08); color:#e2e8f0; font-weight:600;
-    }
-    .hk-helper .ghost { background: transparent; }
-    .hk-helper .close {
-      position:absolute; top:8px; right:10px; font-size:16px; background:transparent; border:none; color:#94a3b8; cursor:pointer;
-    }
-    @keyframes hkFloat { 0%,100% { transform: translateY(0);} 50% { transform: translateY(-6px);} }
   </style>
 </head>
 <body>
@@ -441,77 +413,8 @@
     <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
   </footer>
 
-  <!-- Floating helper popup -->
-  <div class="hk-helper" id="hkHelper" hidden>
-    <button class="close" aria-label="Close helper" title="Close">×</button>
-    <header>
-      <div class="logo">HK</div>
-      <h4>Need help writing a brief?</h4>
-    </header>
-    <p>I’m <strong>Hillary + AI</strong> — Senior Advisor, WHO AFRO (Health Information Systems), currently enrolled in a Generative AI course. Want me to draft a short narrative based on the current analytics/status you’re seeing?</p>
-    <div class="actions">
-      <button id="hkYes">Yes, go ahead</button>
-      <button class="ghost" id="hkNo">No, thanks</button>
-    </div>
-  </div>
-
   <!-- Botpress Webchat v3 -->
   <script src="https://cdn.botpress.cloud/webchat/v3.3/inject.js"></script>
   <script src="https://files.bpcontent.cloud/2025/11/09/06/20251109063717-8SHN5C4I.js" defer></script>
-
-  <!-- Helper logic -->
-  <script>
-    function getCurrentStatusCard() {
-      return Array.from(document.querySelectorAll('.stat-card'))
-        .find(el => /current status/i.test(el.textContent));
-    }
-
-    function placeHelper() {
-      const card = getCurrentStatusCard();
-      const helper = document.getElementById('hkHelper');
-      if (!helper) return;
-
-      const isMobile = matchMedia('(max-width: 900px)').matches;
-      if (!card || isMobile) {
-        helper.style.position = 'fixed';
-        helper.style.left = '24px';
-        helper.style.right = 'auto';
-        helper.style.bottom = '110px';
-        helper.style.top = 'auto';
-        helper.hidden = false;
-        return;
-      }
-
-      const r = card.getBoundingClientRect();
-      const pad = 16;
-      const fitsRight = (window.innerWidth - r.right) > 460;
-      const top = window.scrollY + r.top + pad;
-      const left = window.scrollX + (fitsRight ? r.right + pad : r.left);
-
-      helper.style.position = 'absolute';
-      helper.style.top = `${top}px`;
-      helper.style.left = `${left}px`;
-      helper.style.right = 'auto';
-      helper.style.bottom = 'auto';
-      helper.hidden = false;
-    }
-
-    function openChat() {
-      if (window.botpressWebChat && window.botpressWebChat.sendEvent) {
-        try { window.botpressWebChat.sendEvent({ type: 'show' }); return; } catch(e){}
-      }
-      const launcher = document.querySelector('.bpw-floating-button');
-      if (launcher) launcher.click();
-    }
-
-    window.addEventListener('DOMContentLoaded', () => {
-      placeHelper();
-      window.addEventListener('resize', placeHelper, { passive: true });
-      const helper = document.getElementById('hkHelper');
-      helper?.querySelector('#hkYes')?.addEventListener('click', () => { openChat(); helper.hidden = true; });
-      helper?.querySelector('#hkNo')?.addEventListener('click', () => { helper.hidden = true; });
-      helper?.querySelector('.close')?.addEventListener('click', () => { helper.hidden = true; });
-    });
-  </script>
 </body>
 </html>
