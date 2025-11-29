@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Consultation — Work with Hillary</title>
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body class="bg-orbs">
+  <header>
+    <div class="container header-inner">
+      <a class="brand" href="index.html">
+        <div class="brand-badge">HK</div>
+        <div>
+          <div class="brand-title">Generative AI Portfolio</div>
+          <span class="brand-sub">By Hillary K. Kipruto</span>
+        </div>
+      </a>
+
+      <nav class="nav" aria-label="Primary navigation">
+        <a data-nav href="index.html">Home</a>
+        <a data-nav href="about.html">About</a>
+        <a data-nav href="course.html">Course</a>
+        <a data-nav href="projects.html">Projects</a>
+        <a data-nav href="submissions.html">Submissions</a>
+        <a data-nav href="consultation.html">Consultation</a>
+        <a data-nav href="resume.html">Résumé</a>
+        <a data-nav href="download.html">Download</a>
+      </nav>
+
+      <button class="menu-btn" data-menu-btn aria-expanded="false" aria-controls="drawer">Menu</button>
+    </div>
+
+    <div id="drawer" class="drawer" data-drawer data-open="false">
+      <div class="container">
+        <a data-nav href="index.html">Home</a>
+        <a data-nav href="about.html">About</a>
+        <a data-nav href="course.html">Course</a>
+        <a data-nav href="projects.html">Projects</a>
+        <a data-nav href="submissions.html">Submissions</a>
+        <a data-nav href="consultation.html">Consultation</a>
+        <a data-nav href="resume.html">Résumé</a>
+        <a data-nav href="download.html">Download</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container page">
+    <div class="page-head">
+      <div>
+        <span class="kicker">Consultation</span>
+        <h1>Let’s build something useful</h1>
+        <p class="lead">GenAI automation, dashboards, data hubs, analytics narratives, or rapid documentation support.</p>
+      </div>
+    </div>
+
+    <section class="grid grid-2">
+      <article class="card">
+        <h3>Quick request</h3>
+        <p class="small">This on-page form is a lightweight placeholder (no backend). Use the Google Form for actual submissions.</p>
+
+        <form onsubmit="event.preventDefault(); alert('Thanks! Please use the Google Form on the right to submit.');">
+          <div class="form-grid">
+            <div>
+              <label for="name">Name</label>
+              <input class="input" id="name" name="name" placeholder="Your name" />
+            </div>
+            <div>
+              <label for="org">Organisation / Project</label>
+              <input class="input" id="org" name="org" placeholder="Optional" />
+            </div>
+          </div>
+
+          <div style="margin-top:.9rem;">
+            <label for="msg">What do you want to build with AI?</label>
+            <textarea id="msg" name="message" placeholder="Describe your use case: DHIS2 data narrative, AI bot for team, automation, etc."></textarea>
+          </div>
+
+          <div style="margin-top:.9rem;">
+            <button class="btn btn-primary" type="submit">Send (placeholder)</button>
+          </div>
+        </form>
+      </article>
+
+      <article class="card">
+        <h3>Google Form (recommended)</h3>
+        <p class="small">Use this for actual requests. You’ll receive a copy of your response by email.</p>
+
+        <iframe
+          src="https://docs.google.com/forms/d/e/1FAIpQLSfOgRYKGKp0hAaMBewjtOYmrYp5sUry4_dz5L7x8G1f_R6lHg/viewform?embedded=true"
+          width="100%" height="820" frameborder="0" marginheight="0" marginwidth="0"
+          style="border-radius: 1rem; border: 1px solid rgba(148,163,184,.12); background: rgba(15,23,42,.2);">
+          Loading…
+        </iframe>
+
+        <p class="small">If the form doesn’t load, open it directly in a new tab.</p>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div>© <span id="year"></span> Hillary K. Kipruto · Generative AI for Work & Research</div>
+      <div class="footer-links">
+        <a href="https://kiprutoh.github.io/" target="_blank" rel="noopener">GitHub Pages</a>
+        <a href="https://analytics-afro.streamlit.app/" target="_blank" rel="noopener">Streamlit</a>
+        <a href="https://cdn.botpress.cloud/webchat/v3.3/shareable.html?configUrl=https://files.bpcontent.cloud/2025/11/09/06/20251109063717-AGMWRARO.json" target="_blank" rel="noopener">Chatbot (test)</a>
+      </div>
+    </div>
+  </footer>
+  <script src="assets/app.js"></script>
+
+  <!-- Botpress Webchat v3 -->
+  <script src="https://cdn.botpress.cloud/webchat/v3.3/inject.js"></script>
+  <script src="https://files.bpcontent.cloud/2025/11/09/06/20251109063717-8SHN5C4I.js" defer></script>
+</body>
+</html>

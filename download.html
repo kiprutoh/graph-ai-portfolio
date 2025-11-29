@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Download — Site Files</title>
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body class="bg-orbs">
+  <header>
+    <div class="container header-inner">
+      <a class="brand" href="index.html">
+        <div class="brand-badge">HK</div>
+        <div>
+          <div class="brand-title">Generative AI Portfolio</div>
+          <span class="brand-sub">By Hillary K. Kipruto</span>
+        </div>
+      </a>
+
+      <nav class="nav" aria-label="Primary navigation">
+        <a data-nav href="index.html">Home</a>
+        <a data-nav href="about.html">About</a>
+        <a data-nav href="course.html">Course</a>
+        <a data-nav href="projects.html">Projects</a>
+        <a data-nav href="submissions.html">Submissions</a>
+        <a data-nav href="consultation.html">Consultation</a>
+        <a data-nav href="resume.html">Résumé</a>
+        <a data-nav href="download.html">Download</a>
+      </nav>
+
+      <button class="menu-btn" data-menu-btn aria-expanded="false" aria-controls="drawer">Menu</button>
+    </div>
+
+    <div id="drawer" class="drawer" data-drawer data-open="false">
+      <div class="container">
+        <a data-nav href="index.html">Home</a>
+        <a data-nav href="about.html">About</a>
+        <a data-nav href="course.html">Course</a>
+        <a data-nav href="projects.html">Projects</a>
+        <a data-nav href="submissions.html">Submissions</a>
+        <a data-nav href="consultation.html">Consultation</a>
+        <a data-nav href="resume.html">Résumé</a>
+        <a data-nav href="download.html">Download</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container page">
+    <div class="page-head">
+      <div>
+        <span class="kicker">Download</span>
+        <h1>Download all site files</h1>
+        <p class="lead">Two ways: download a ZIP (offline) or pull from GitHub (recommended for edits).</p>
+      </div>
+      <div class="actions">
+        <a class="btn btn-primary" href="site-files.zip" download>Download ZIP</a>
+        <a class="btn" href="projects.html">Projects gallery</a>
+      </div>
+    </div>
+
+    <section class="grid grid-2">
+      <article class="card">
+        <h3>Option A: ZIP (offline)</h3>
+        <p class="small">
+          If you place a file called <code>site-files.zip</code> in the same folder as this page, the button above will work on GitHub Pages too.
+          (In this ChatGPT package, the ZIP is already included.)
+        </p>
+        <p class="small">
+          After downloading: unzip → open <code>index.html</code> → edit files → push to GitHub Pages.
+        </p>
+      </article>
+
+      <article class="card">
+        <h3>Option B: GitHub (recommended)</h3>
+        <p class="small">
+          Use GitHub to track changes. In your repo, click <strong>Code → Download ZIP</strong> or clone the repository.
+        </p>
+        <div class="btn-row" style="margin-top:.6rem;">
+          <a class="btn btn-sm" href="https://github.com/kiprutoh/graph-ai-portfolio" target="_blank" rel="noopener">Open repo</a>
+          <a class="btn btn-sm" href="https://github.com/kiprutoh/graph-ai-portfolio/archive/refs/heads/main.zip" target="_blank" rel="noopener">Direct ZIP (main)</a>
+        </div>
+        <p class="small" style="margin-top:.75rem;">If your repo name/branch differs, update the links above.</p>
+      </article>
+    </section>
+
+    <section class="card" style="margin-top:1rem;">
+      <h3>What’s included</h3>
+      <p class="small">Static HTML pages + shared CSS/JS + project thumbnails:</p>
+      <ul style="color: rgba(226,232,255,0.78); margin: .6rem 0 0 1.1rem;">
+        <li><code>index.html</code>, <code>about.html</code>, <code>course.html</code>, <code>projects.html</code>, <code>submissions.html</code>, <code>consultation.html</code>, <code>resume.html</code>, <code>download.html</code></li>
+        <li><code>assets/styles.css</code>, <code>assets/app.js</code></li>
+        <li><code>assets/projects.js</code>, <code>assets/projects-page.js</code></li>
+        <li><code>assets/thumbs/*.svg</code></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div>© <span id="year"></span> Hillary K. Kipruto · Generative AI for Work & Research</div>
+      <div class="footer-links">
+        <a href="https://kiprutoh.github.io/" target="_blank" rel="noopener">GitHub Pages</a>
+        <a href="https://analytics-afro.streamlit.app/" target="_blank" rel="noopener">Streamlit</a>
+        <a href="https://cdn.botpress.cloud/webchat/v3.3/shareable.html?configUrl=https://files.bpcontent.cloud/2025/11/09/06/20251109063717-AGMWRARO.json" target="_blank" rel="noopener">Chatbot (test)</a>
+      </div>
+    </div>
+  </footer>
+  <script src="assets/app.js"></script>
+
+  <!-- Botpress Webchat v3 -->
+  <script src="https://cdn.botpress.cloud/webchat/v3.3/inject.js"></script>
+  <script src="https://files.bpcontent.cloud/2025/11/09/06/20251109063717-8SHN5C4I.js" defer></script>
+</body>
+</html>

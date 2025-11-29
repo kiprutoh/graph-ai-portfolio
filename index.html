@@ -2,429 +2,139 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Generative AI for Work & Research – Portfolio</title>
-  <style>
-    :root {
-      --bg: radial-gradient(circle at top, #0f172a 0%, #020617 40%, #020617 100%);
-      --panel: rgba(2, 6, 23, 0.35);
-      --accent: #38bdf8;
-      --accent-soft: rgba(56, 189, 248, 0.15);
-      --muted: rgba(226, 232, 255, 0.7);
-      --text: #e2e8f0;
-      --radius-lg: 1.5rem;
-      --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.35);
-
-      /* Botpress theme */
-      --bpw-primary: #38bdf8;
-      --bpw-secondary: #6366f1;
-      --bpw-text: #e2e8f0;
-      --bpw-bot-message-bg: rgba(56,189,248,.08);
-      --bpw-user-message-bg: rgba(99,102,241,.18);
-      --bpw-bg: #0b1220;
-      --bpw-launcher-size: 64px;
-      --bpw-launcher-shadow: 0 18px 40px rgba(56,189,248,.35);
-    }
-
-    * { box-sizing: border-box; scroll-behavior: smooth; }
-
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-      min-height: 100vh;
-    }
-
-    .blur-ball {
-      position: fixed;
-      inset: auto -15rem 0 auto;
-      width: 25rem; height: 25rem;
-      background: radial-gradient(circle, rgba(59,130,246,.3), rgba(15,23,42,0));
-      filter: blur(120px);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    header {
-      position: sticky; top: 0; z-index: 50;
-      background: radial-gradient(circle at top, rgba(2,6,23,.85), rgba(2,6,23,.35));
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(148,163,184,.12);
-    }
-
-    .nav-container {
-      max-width: 1100px; margin: 0 auto;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 1rem 1.25rem;
-    }
-
-    .brand { display: flex; gap: .65rem; align-items: center; font-weight: 600; letter-spacing: .02em; }
-    .brand-circle {
-      width: 32px; height: 32px; border-radius: 9999px;
-      background: linear-gradient(150deg,#38bdf8 0%, #f97316 100%);
-      display: grid; place-items: center;
-      font-size: .65rem; font-weight: 700; color: #020617;
-      box-shadow: 0 8px 24px rgba(56,189,248,.3);
-    }
-
-    nav a {
-      color: var(--muted); text-decoration: none; margin-left: 1.15rem; font-size: .9rem; transition: .2s ease;
-    }
-    nav a:hover, nav a:focus { color: #fff; }
-
-    .hero {
-      max-width: 1100px; margin: 2.75rem auto 2.5rem; padding: 0 1.25rem;
-      display: grid; grid-template-columns: 1.15fr .85fr; gap: 2.5rem; align-items: center;
-    }
-
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: .5rem;
-      background: rgba(15,23,42,.35);
-      border: 1px solid rgba(56,189,248,.25);
-      border-radius: 999px; padding: .35rem .9rem; font-size: .7rem;
-      text-transform: uppercase; letter-spacing: .12em; color: var(--muted); margin-bottom: 1.15rem;
-    }
-
-    .hero h1 { font-size: clamp(2.35rem, 5vw, 3rem); margin-bottom: .75rem; letter-spacing: -.02em; }
-    .hero p { color: var(--muted); max-width: 36rem; }
-
-    .hero-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-top: 1.5rem; }
-    .stat-card {
-      background: radial-gradient(circle at top, rgba(15,23,42,.55), rgba(15,23,42,0));
-      border: 1px solid rgba(148,163,184,.12);
-      border-radius: 1.25rem; padding: .9rem 1rem 1rem; box-shadow: 0 14px 40px rgba(0,0,0,.3);
-    }
-    .stat-card small { color: var(--muted); font-size: .7rem; text-transform: uppercase; letter-spacing: .08em; }
-    .stat-card h3 { margin: .35rem 0 0; font-size: 1.5rem; }
-
-    .hero-right {
-      background: radial-gradient(circle at 30% 40%, rgba(56,189,248,.15), rgba(2,6,23,0) 65%), rgba(15,23,42,.15);
-      border: 1px solid rgba(148,163,184,.25);
-      border-radius: 1.5rem; padding: 1.3rem 1.1rem 1.4rem; box-shadow: var(--shadow-lg);
-    }
-
-    .section { max-width: 1100px; margin: 0 auto 2.75rem; padding: 0 1.25rem; }
-    .section-title { font-size: 1.25rem; margin-bottom: 1.25rem; display: inline-flex; align-items: center; gap: .5rem; }
-    .section-title::before {
-      content: ""; width: 3.1rem; height: 3px;
-      background: linear-gradient(90deg, #38bdf8 0%, rgba(56,189,248,0));
-      border-radius: 999px;
-    }
-
-    .about-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 1.75rem; }
-    .card {
-      background: radial-gradient(circle at 10% 10%, rgba(15,23,42,.65), rgba(2,6,23,.1));
-      border: 1px solid rgba(148,163,184,.1);
-      border-radius: 1.25rem; padding: 1.1rem 1.25rem 1.25rem; box-shadow: 0 10px 30px rgba(0,0,0,.25);
-    }
-
-    .timeline { display: grid; gap: 1rem; }
-    .timeline-item {
-      background: rgba(15,23,42,.15);
-      border: 1px solid rgba(148,163,184,.12);
-      border-radius: 1rem; padding: .75rem 1rem .6rem;
-    }
-
-    .badge-soft {
-      display: inline-flex; background: rgba(56,189,248,.1);
-      color: #e2e8f0; border: 1px solid rgba(56,189,248,.35);
-      border-radius: 999px; padding: .25rem .6rem; font-size: .65rem;
-      text-transform: uppercase; letter-spacing: .08em;
-    }
-
-    .course-highlights { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1rem; }
-    .course-pill {
-      background: rgba(15,23,42,.35);
-      border: 1px solid rgba(148,163,184,.12);
-      border-radius: 1.5rem; padding: .75rem .85rem .9rem;
-    }
-
-    .submissions-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 1rem; }
-    .submission-card {
-      background: rgba(15,23,42,.25);
-      border: 1px solid rgba(148,163,184,.15);
-      border-radius: 1.1rem; padding: .85rem .9rem 1rem; display: flex; flex-direction: column; gap: .35rem;
-    }
-
-    footer {
-      max-width: 1100px; margin: 0 auto;
-      padding: 2.25rem 1.25rem 2.5rem;
-      border-top: 1px solid rgba(148,163,184,.08);
-      color: rgba(226,232,255,0.4); font-size: .75rem;
-    }
-
-    a.inline-link {
-      color: #e2e8f0; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .3rem;
-    }
-
-    @media (max-width: 900px) {
-      .hero { grid-template-columns: 1fr; }
-      .about-grid { grid-template-columns: 1fr; }
-      nav { display: none; }
-      header { position: sticky; }
-    }
-
-    /* ===== Fancy AI chat bubble (Botpress Webchat v3) ===== */
-    .bpw-floating-button,
-    .bpw-widget-container .bpw-floating-button {
-      position: fixed;
-      bottom: 24px !important; right: 24px !important;
-      width: var(--bpw-launcher-size); height: var(--bpw-launcher-size);
-      border-radius: 9999px;
-      background: conic-gradient(from 210deg at 50% 50%, #1e293b, #0ea5e9, #6366f1, #1e293b);
-      background-size: 200% 200%;
-      border: 1px solid rgba(56,189,248,.45);
-      box-shadow: var(--bpw-launcher-shadow);
-      animation: swirl 6s ease-in-out infinite;
-      z-index: 9999; overflow: visible;
-    }
-    .bpw-floating-button:hover { transform: translateY(-2px); box-shadow: 0 22px 50px rgba(56,189,248,.45); }
-    .bpw-floating-button::before {
-      content: ""; position: absolute; inset: -8px; border-radius: 9999px;
-      background: radial-gradient(circle, rgba(56,189,248,.25), transparent 60%);
-      filter: blur(10px); animation: pulse 2.6s ease-in-out infinite; pointer-events: none;
-    }
-    .bpw-floating-button::after {
-      content: "Hillary + AI";
-      position: absolute; right: calc(100% + 12px); top: 50%; transform: translateY(-50%);
-      background: rgba(15,23,42,.9); border: 1px solid rgba(148,163,184,.25);
-      color: #e2e8f0; padding: .25rem .55rem; font-size: .72rem; border-radius: .5rem;
-      opacity: 0; pointer-events: none; transition: opacity .2s ease; white-space: nowrap;
-    }
-    .bpw-floating-button:hover::after { opacity: 1; }
-    .bpw-floating-button svg { transform: scale(1.12); }
-
-    .bpw-chat, .bpw-chat-container {
-      border-radius: 1.1rem !important;
-      box-shadow: 0 30px 80px rgba(2,6,23,.6) !important;
-      border: 1px solid rgba(148,163,184,.15) !important;
-      background: linear-gradient(180deg, rgba(2,6,23,.98), rgba(2,6,23,.92)) !important;
-      color: var(--bpw-text) !important;
-    }
-    .bpw-bot-message { background: var(--bpw-bot-message-bg) !important; color: var(--bpw-text) !important; }
-    .bpw-from-user   { background: var(--bpw-user-message-bg) !important; color: #fff !important; }
-
-    /* Rename in chat header */
-    .bpw-header-title * { visibility: hidden !important; }
-    .bpw-header-title::after {
-      content: "Hillary + AI"; visibility: visible; display: inline-block; font-weight: 600;
-    }
-
-    @keyframes pulse { 0%,100% { opacity:.55; transform:scale(1);} 50% { opacity:1; transform:scale(1.04);} }
-    @keyframes swirl { 0% {background-position:0% 50%;} 50% {background-position:100% 50%;} 100% {background-position:0% 50%;} }
-  </style>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Generative AI Portfolio — Hillary K. Kipruto</title>
+  <meta name="description" content="Generative AI for Work & Research portfolio: AI, data systems, and public health." />
+  <link rel="stylesheet" href="assets/styles.css" />
 </head>
-<body>
-  <div class="blur-ball"></div>
+<body class="bg-orbs">
   <header>
-    <div class="nav-container">
-      <div class="brand">
-        <div class="brand-circle">HK</div>
+    <div class="container header-inner">
+      <a class="brand" href="index.html">
+        <div class="brand-badge">HK</div>
         <div>
-          <div>Generative AI Portfolio</div>
-          <small style="color: rgba(226,232,255,0.5); font-size: .7rem;">By Hillary K. Kipruto</small>
+          <div class="brand-title">Generative AI Portfolio</div>
+          <span class="brand-sub">By Hillary K. Kipruto</span>
         </div>
-      </div>
-      <nav>
-        <a href="#about">About Me</a>
-        <a href="#course">About the Course</a>
-        <a href="#submissions">Weekly Submissions</a>
-        <a href="#consultation">Consultation</a>
-        <a href="#contact-consultation">Contact for Consultation</a>
-        <a href="#resume">Download Résumé</a>
+      </a>
+
+      <nav class="nav" aria-label="Primary navigation">
+        <a data-nav href="index.html">Home</a>
+        <a data-nav href="about.html">About</a>
+        <a data-nav href="course.html">Course</a>
+        <a data-nav href="projects.html">Projects</a>
+        <a data-nav href="submissions.html">Submissions</a>
+        <a data-nav href="consultation.html">Consultation</a>
+        <a data-nav href="resume.html">Résumé</a>
+        <a data-nav href="download.html">Download</a>
       </nav>
+
+      <button class="menu-btn" data-menu-btn aria-expanded="false" aria-controls="drawer">Menu</button>
+    </div>
+
+    <div id="drawer" class="drawer" data-drawer data-open="false">
+      <div class="container">
+        <a data-nav href="index.html">Home</a>
+        <a data-nav href="about.html">About</a>
+        <a data-nav href="course.html">Course</a>
+        <a data-nav href="projects.html">Projects</a>
+        <a data-nav href="submissions.html">Submissions</a>
+        <a data-nav href="consultation.html">Consultation</a>
+        <a data-nav href="resume.html">Résumé</a>
+        <a data-nav href="download.html">Download</a>
+      </div>
     </div>
   </header>
 
-  <main>
-    <section class="hero" aria-labelledby="hero-title" style="grid-template-columns:1fr; text-align:center; gap:1.8rem;">
-      <div style="display:flex; flex-direction:column; align-items:center; gap:1.25rem;">
-        <div style="width:110px; height:110px; border-radius:999px; background:radial-gradient(circle, rgba(56,189,248,.2), rgba(2,6,23,0)); border:2px solid rgba(226,232,255,.35); display:grid; place-items:center; box-shadow:0 14px 30px rgba(0,0,0,.3); overflow:hidden;">
-          <img src="https://github.com/kiprutoh/graph-ai-portfolio/raw/ec7623a47713f38f4a117ebc6ea830fb1f47b954/Hillary%20Photo.jpg" alt="Portrait of Hillary Kipruto" style="width:100%; height:100%; object-fit:cover; border-radius:999px;" />
-        </div>
-        <span class="hero-badge">Generative AI · Work &amp; Research</span>
-        <h1 id="hero-title" style="max-width:40rem;">Generative AI Portfolio</h1>
-        <p style="max-width:42rem; color:var(--muted);">A single-page showcase of how I use AI to draft health and research artefacts, automate documentation, and speed up analysis – built while I am a <strong>Public Health doctoral student at the University of Pretoria</strong>.</p>
-        <div class="hero-cards" style="max-width:46rem;">
-          <div class="stat-card">
-            <small>Current status</small>
-            <h3>Senior Advisor, WHO AFRO (HIS) · Enrolled in Generative AI course</h3>
-          </div>
-          <div class="stat-card">
-            <small>Focus areas</small>
-            <h3>HIS · Digital health · AI</h3>
-          </div>
-          <div class="stat-card">
-            <small>Portfolio</small>
-            <h3>Course submissions</h3>
-          </div>
-        </div>
+  <main class="container page">
+    <div class="page-head">
+      <div>
+        <span class="kicker">Generative AI · Work &amp; Research</span>
+        <h1>AI • Data • Public Health</h1>
+        <p class="lead">
+          A polished, multi-page portfolio documenting how I use Generative AI to accelerate drafting,
+          analysis, and digital health work—built during my University of Pretoria doctoral journey.
+        </p>
       </div>
+      <div class="actions">
+        <a class="btn btn-primary" href="projects.html">Explore projects</a>
+        <a class="btn" href="submissions.html">Weekly submissions</a>
+        <a class="btn btn-ghost" href="https://analytics-afro.streamlit.app/" target="_blank" rel="noopener">Streamlit demo</a>
+      </div>
+    </div>
+
+    <section class="hero">
+      <article class="card hero-card">
+        <div class="profile">
+          <div class="avatar">
+            <img src="https://github.com/kiprutoh/graph-ai-portfolio/raw/ec7623a47713f38f4a117ebc6ea830fb1f47b954/Hillary%20Photo.jpg" alt="Portrait of Hillary Kipruto">
+          </div>
+          <div>
+            <div class="tag">Now building</div>
+            <h3 style="margin:.35rem 0 .15rem;">Hillary + AI chatbot (in progress)</h3>
+            <p class="small">A lightweight assistant to support analytics, documentation, and navigation of artefacts (token limits still being optimized).</p>
+          </div>
+        </div>
+
+        <div class="stat-row">
+          <div class="stat">
+            <div class="label">Role</div>
+            <div class="value">WHO AFRO · HIS</div>
+          </div>
+          <div class="stat">
+            <div class="label">Focus</div>
+            <div class="value">Digital health · AI</div>
+          </div>
+          <div class="stat">
+            <div class="label">Portfolio</div>
+            <div class="value">8-week cohort</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card hero-card">
+        <div class="tag">Quick links</div>
+        <h3>Start here</h3>
+        <p class="small">Use pages instead of scrolling through one long wall of content.</p>
+        <div class="grid" style="margin-top:.9rem;">
+          <a class="btn" href="about.html">About me →</a>
+          <a class="btn" href="course.html">Course breakdown →</a>
+          <a class="btn" href="projects.html">Projects gallery →</a>
+          <a class="btn" href="download.html">Download site files →</a>
+        </div>
+      </article>
     </section>
 
-    <section id="about" class="section">
-      <h2 class="section-title">AI | Data | Public Health — bridging it all together</h2>
-      <div class="about-grid">
-        <div class="card">
-          <p>I’m <strong>Hillary Kipruto</strong>, a health systems specialist and current <strong>Public Health doctoral student at the University of Pretoria</strong>. I work at the intersection of <strong>AI, data systems, and public health</strong> to help teams turn messy, multi-source health data into clear, decision-ready intelligence.</p>
-          <p>Over the past 10+ years I’ve helped design, deploy, or improve health information systems, digital health tools, and data standards across African settings. My strength is <strong>bridging analytics, project management, and organizational change</strong> so that data products are actually used.</p>
-          <p>This portfolio documents how I’m applying <strong>Generative AI</strong> to accelerate report drafting, metadata creation, policy notes, literature reviews, and dashboards.</p>
-        </div>
-        <div class="card">
-          <h3 style="margin-top:0;">Core Skills</h3>
-          <p style="display:flex; flex-wrap:wrap; gap:.5rem;">
-            <span class="badge-soft">SQL</span>
-            <span class="badge-soft">Python</span>
-            <span class="badge-soft">R</span>
-            <span class="badge-soft">STATA</span>
-            <span class="badge-soft">Data Visualization</span>
-            <span class="badge-soft">Forecasting</span>
-            <span class="badge-soft">Generative AI &amp; LLMs</span>
-          </p>
-          <p style="color:var(--muted); font-size:.85rem;">Current focus: automating data pipelines, AI-powered dashboards, and LLM agents for literature review &amp; unstructured data analysis.</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="course" class="section">
-      <h2 class="section-title">About the Course</h2>
-      <div class="card">
-        <p><strong>Generative AI for Work &amp; Research</strong> is an <strong>8-week, live cohort</strong> bootcamp on <strong>no-code AI tools for task automation</strong>. It combines weekly workshops, live help sessions, private community forums, personalised feedback, capstone coaching, and a shareable certificate.</p>
-        <p style="margin-bottom:1.15rem;">I’m using it to push my public health work toward <strong>AI | Data | Public Health</strong> — faster documentation, smarter literature scans, and AI-assisted data products.</p>
-        <div class="course-highlights" style="margin-bottom:1.15rem;">
-          <div class="course-pill">
-            <h3 style="margin:.35rem 0 .35rem; font-size:.95rem;">Bootcamp features</h3>
-            <p style="color:var(--muted); font-size:.8rem;">Weekly live sessions, private community, feedback on assessments, capstone coaching, lifetime tutorial access.</p>
-          </div>
-          <div class="course-pill">
-            <h3 style="margin:.35rem 0 .35rem; font-size:.95rem;">What it teaches</h3>
-            <p style="color:var(--muted); font-size:.8rem;">Generate sites, docs, and decks; automate analysis; build research chatbots; and ship a final AI project.</p>
-          </div>
-        </div>
-        <div style="display:grid; gap:1rem; grid-template-columns:repeat(auto-fit, minmax(230px, 1fr));">
-          <div class="course-pill">
-            <h3 style="margin:0 0 .25rem; font-size:.9rem;">Module 1 · Websites, Documents &amp; Presentations</h3>
-            <p style="color:var(--muted); font-size:.77rem;">How LLMs work, generating Markdown/HTML, building simple research sites, AI for decks.</p>
-          </div>
-          <div class="course-pill">
-            <h3 style="margin:0 0 .25rem; font-size:.9rem;">Module 2 · AI-Automated Data Analysis</h3>
-            <p style="color:var(--muted); font-size:.77rem;">Use ChatGPT Code Interpreter/Julius to process datasets, create automated reports &amp; dashboards.</p>
-          </div>
-          <div class="course-pill">
-            <h3 style="margin:0 0 .25rem; font-size:.9rem;">Module 3 · GenAI for Research &amp; Text</h3>
-            <p style="color:var(--muted); font-size:.77rem;">AI-assisted literature reviews, text classification, summarisation and knowledge maps.</p>
-          </div>
-          <div class="course-pill">
-            <h3 style="margin:0 0 .25rem; font-size:.9rem;">Module 4 · Custom LLM Chatbots</h3>
-            <p style="color:var(--muted); font-size:.77rem;">Build RAG-style assistants and connect them to knowledge bases for research work.</p>
-          </div>
-          <div class="course-pill">
-            <h3 style="margin:0 0 .25rem; font-size:.9rem;">Module 5 · AI for Task Automation</h3>
-            <p style="color:var(--muted); font-size:.77rem;">Set up email automations, AI agents, and browser-based flows for repetitive research/admin tasks.</p>
-          </div>
-          <div class="course-pill">
-            <h3 style="margin:0 0 .25rem; font-size:.9rem;">Module 6 · GenAI for Communication</h3>
-            <p style="color:var(--muted); font-size:.77rem;">Generate multi-audience summaries, visuals, video abstracts and scheduled content.</p>
-          </div>
-          <div class="course-pill">
-            <h3 style="margin:0 0 .25rem; font-size:.9rem;">Module 7 · Capstone &amp; Showcase</h3>
-            <p style="color:var(--muted); font-size:.77rem;">Build and present a working AI solution with real-time feedback.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="submissions" class="section">
-      <h2 class="section-title">Weekly submissions</h2>
-      <p style="color: var(--muted); max-width: 45rem;">Each week maps to a course module. Click items in the live site to attach artefacts later.</p>
-      <div class="submissions-grid" style="margin-top: 1.25rem;">
-        <article class="submission-card">
-          <div class="badge-soft">Week 1</div>
-          <h3>Websites, Docs &amp; Decks</h3>
-          <p style="color: var(--muted); font-size: .8rem;">GenAI portfolio website (this page).</p>
-        </article>
-        <article class="submission-card">
-          <div class="badge-soft">Week 2</div>
-          <h3>Workshop 2: Automated Data Analysis</h3>
-          <p style="color: var(--muted); font-size: .8rem;">Analyzed Gapminder data to explore relationships between two global indicators using AI tools.</p>
-          <a href="https://github.com/kiprutoh/graph-ai-portfolio/blob/main/data_report.html" style="color:#38bdf8; font-size:.75rem; text-decoration:underline; text-underline-offset:.25rem;">View report →</a>
-        </article>
-        <article class="submission-card">
-          <div class="badge-soft">Week 3</div>
-          <h3>GenAI for Research/Text</h3>
-          <p style="color: var(--muted); font-size: .8rem;">Glassdoor job market analysis – structured insights.</p>
-        </article>
-        <article class="submission-card">
-          <div class="badge-soft">Week 4</div>
-          <h3>Custom LLM Chatbot</h3>
-          <p style="color: var(--muted); font-size: .8rem;">“Aithena” – support bot for project/team help.</p>
-        </article>
-        <article class="submission-card">
-          <div class="badge-soft">Week 5</div>
-          <h3>AI-driven Workflows</h3>
-          <p style="color: var(--muted); font-size: .8rem;">Email/consultation automation for data projects.</p>
-        </article>
-        <article class="submission-card">
-          <div class="badge-soft">Week 6–8</div>
-          <h3>Capstone &amp; Showcase</h3>
-          <p style="color: var(--muted); font-size: .8rem;">Integrated AI workflow + presentation pack.</p>
-        </article>
-      </div>
-    </section>
-
-    <section id="consultation" class="section">
-      <h2 class="section-title">Consultation</h2>
-      <div class="card">
-        <p style="color:var(--muted);">Interested in GenAI automation, data products, or public health analytics? Use this section to share project details. (Form placeholder.)</p>
-        <form style="display:grid; gap:.75rem; grid-template-columns:1fr 1fr;">
-          <label style="display:flex; flex-direction:column; gap:.35rem; font-size:.8rem; color:var(--muted);">
-            Name
-            <input type="text" name="name" placeholder="Your name" style="background:rgba(15,23,42,.35); border:1px solid rgba(148,163,184,.18); border-radius:.6rem; padding:.5rem .65rem; color:#fff;" />
-          </label>
-          <label style="display:flex; flex-direction:column; gap:.35rem; font-size:.8rem; color:var(--muted);">
-            Organisation / Project
-            <input type="text" name="org" placeholder="Optional" style="background:rgba(15,23,42,.35); border:1px solid rgba(148,163,184,.18); border-radius:.6rem; padding:.5rem .65rem; color:#fff;" />
-          </label>
-          <label style="grid-column:1 / -1; display:flex; flex-direction:column; gap:.35rem; font-size:.8rem; color:var(--muted);">
-            What do you want to build with AI?
-            <textarea name="message" rows="4" placeholder="Describe your use case: DHIS2 data narrative, AI bot for team, automation, etc." style="background:rgba(15,23,42,.35); border:1px solid rgba(148,163,184,.18); border-radius:.6rem; padding:.5rem .65rem; color:#fff;"></textarea>
-          </label>
-          <button type="submit" style="grid-column:1 / -1; background:linear-gradient(120deg, #38bdf8, #6366f1); border:none; color:#020617; font-weight:600; padding:.55rem 1.15rem; border-radius:.75rem; cursor:pointer;">Send consultation request</button>
-        </form>
-      </div>
-    </section>
-
-    <!-- NEW: Google Form embed section -->
-    <section id="contact-consultation" class="section" aria-labelledby="contact-title">
-      <h2 class="section-title" id="contact-title">Contact for Consultation</h2>
-      <div class="card">
-        <p style="color:var(--muted);">Use the Google Form below to request a consultation. You’ll receive a copy of your responses by email.</p>
-        <div style="display:grid; place-items:center;">
-          <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfOgRYKGKp0hAaMBewjtOYmrYp5sUry4_dz5L7x8G1f_R6lHg/viewform?embedded=true" width="100%" height="820" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
-        </div>
-        <p style="color:var(--muted); font-size:.85rem;">If the form doesn’t load, open it <a class="inline-link" target="_blank" rel="noopener" href="https://docs.google.com/forms/d/e/1FAIpQLSfOgRYKGKp0hAaMBewjtOYmrYp5sUry4_dz5L7x8G1f_R6lHg/viewform">directly in a new tab</a>.</p>
-      </div>
-    </section>
-
-    <section id="resume" class="section">
-      <h2 class="section-title">Download Résumé</h2>
-      <div class="card">
-        <p style="color:var(--muted);">Full CV with projects, digital health work, and AI/public health integration.</p>
-        <a href="#" style="display:inline-flex; gap:.45rem; align-items:center; background:rgba(15,23,42,.5); border:1px solid rgba(148,163,184,.25); border-radius:.75rem; padding:.45rem .9rem; color:#fff; text-decoration:none;">Download PDF</a>
-      </div>
+    <section class="grid grid-3" style="margin-top: 1.4rem;">
+      <article class="card">
+        <span class="tag">Writing</span>
+        <h3>Faster documentation</h3>
+        <p class="small">Generate drafts for concept notes, policy briefs, and technical reports—then refine with domain judgement.</p>
+      </article>
+      <article class="card">
+        <span class="tag">Analysis</span>
+        <h3>AI-assisted workflows</h3>
+        <p class="small">Rapid EDA, plot drafting, and narrative summaries for indicators and dashboards.</p>
+      </article>
+      <article class="card">
+        <span class="tag">Delivery</span>
+        <h3>Shareable outputs</h3>
+        <p class="small">Publish-ready pages, reports, and small tools that make work visible and reusable.</p>
+      </article>
     </section>
   </main>
 
   <footer>
-    <p>© <span id="year"></span> Hillary K. Kipruto · Generative AI for Work &amp; Research. Built without frontend frameworks.</p>
-    <p>
-      Quick test link:
-      <a class="inline-link" href="https://cdn.botpress.cloud/webchat/v3.3/shareable.html?configUrl=https://files.bpcontent.cloud/2025/11/09/06/20251109063717-AGMWRARO.json" target="_blank" rel="noopener">Open chatbot in a new tab →</a>
-    </p>
-    <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+    <div class="container">
+      <div>© <span id="year"></span> Hillary K. Kipruto · Generative AI for Work & Research</div>
+      <div class="footer-links">
+        <a href="https://kiprutoh.github.io/" target="_blank" rel="noopener">GitHub Pages</a>
+        <a href="https://analytics-afro.streamlit.app/" target="_blank" rel="noopener">Streamlit</a>
+        <a href="https://cdn.botpress.cloud/webchat/v3.3/shareable.html?configUrl=https://files.bpcontent.cloud/2025/11/09/06/20251109063717-AGMWRARO.json" target="_blank" rel="noopener">Chatbot (test)</a>
+      </div>
+    </div>
   </footer>
+  <script src="assets/app.js"></script>
 
   <!-- Botpress Webchat v3 -->
   <script src="https://cdn.botpress.cloud/webchat/v3.3/inject.js"></script>
